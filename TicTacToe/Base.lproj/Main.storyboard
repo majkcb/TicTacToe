@@ -228,6 +228,15 @@
                                     <constraint firstAttribute="width" secondItem="gZV-nT-1tq" secondAttribute="height" multiplier="1:1" id="anZ-ij-pKX"/>
                                 </constraints>
                             </stackView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="backward.end" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Dmc-jN-byo">
+                                <rect key="frame" x="316" y="73.333333333333258" width="33" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="GhV-Z7-5oE" appends="YES" id="4s6-ed-29X"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BRl-lM-Av0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -256,13 +265,22 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnl-3d-7OJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="GhV-Z7-5oE">
+                    <connections>
+                        <action selector="exitGameTap:" destination="TWl-72-ott" id="Cwn-gx-YDF"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="881.67938931297704" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>
+        <image name="backward.end" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

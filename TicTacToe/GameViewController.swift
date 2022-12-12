@@ -15,6 +15,11 @@ class GameViewController: UIViewController {
     var p1Name : String?
     var p2Name : String?
     
+    // Score
+    
+    var xScore = 0
+    var oScore = 0
+    
     //This enum is used to determine whose turn it is
     
     enum Turn {
@@ -58,6 +63,12 @@ class GameViewController: UIViewController {
     
     }
     
+    
+    @IBAction func exitGameTap(_ sender: UITapGestureRecognizer) {
+        
+        
+    }
+    
     // Function to initialize the buttons to the array (aka the board)
     
     func initializeBoard() {
@@ -81,17 +92,88 @@ class GameViewController: UIViewController {
         
         addToBoard(sender)
         
+        // Checks to see if "X" has won
+        
+        if checkForVictory(CROSS){
+            xScore += 1
+        resultAlert(title: "\(p1Name ?? "X") Wins!")
+            
+        }
+        
+        // Checks to see if "O" has won
+        
+        if checkForVictory(CIRCLE){
+            oScore += 1
+        resultAlert(title: "\(p2Name ?? "O") Wins!")
+            
+        }
+        
         if (fullBoard()) {
             resultAlert(title: "It's a draw!")
         }
         
     }
     
-    // Function that alerts the users (in this case that the board is full, and containins a function to reset the board
+    func checkForVictory(_ s :String) -> Bool {
+        
+        //Horizontal Victory
+        
+        if thisSymbol(a1, s) && thisSymbol(a2, s) && thisSymbol(a3, s) {
+            return true
+        }
+        
+        if thisSymbol(b1, s) && thisSymbol(b2, s) && thisSymbol(b3, s) {
+            return true
+        }
+        
+        if thisSymbol(c1, s) && thisSymbol(c2, s) && thisSymbol(c3, s) {
+            return true
+        }
+        
+        //Vertical Victory
+        
+        if thisSymbol(a1, s) && thisSymbol(b1, s) && thisSymbol(c1, s) {
+            return true
+        }
+        
+        if thisSymbol(a2, s) && thisSymbol(b2, s) && thisSymbol(c2, s) {
+            return true
+        }
+        
+        if thisSymbol(a3, s) && thisSymbol(b3, s) && thisSymbol(c3, s) {
+            return true
+        }
+        
+        //Diagonal Victory
+        
+        if thisSymbol(a1, s) && thisSymbol(b2, s) && thisSymbol(c3, s) {
+            return true
+        }
+        
+        if thisSymbol(a3, s) && thisSymbol(b2, s) && thisSymbol(c1, s) {
+            return true
+        }
+        
+        return false
+    }
+    
+    // Checks to see if the button contains a symbol (X / O)
+    
+    func thisSymbol(_ button: UIButton, _ symbol: String) -> Bool {
+        return button.title(for: .normal) == symbol
+    }
+    
+    // Function that alerts the users (in this case that the board is full), and containins a function to reset the board
     
     func resultAlert(title: String) {
         
-        let ac = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
+        // Score update message
+        
+        let message = "\n\(p1Name ?? "Crosses"): " + String(xScore) + "\n\(p2Name ?? "Circles"): " + String(oScore)
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        
+        // Reset board action
+
         ac.addAction(UIAlertAction(title: "Continue Playing", style: .default, handler: { (_) in self.resetBoard()
             }))
         self.present(ac, animated: true)
