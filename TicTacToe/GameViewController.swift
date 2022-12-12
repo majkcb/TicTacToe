@@ -32,6 +32,10 @@ class GameViewController: UIViewController {
     var CIRCLE = "O"
     var CROSS = "X"
     
+    // Array of buttons (the board)
+    
+    var board = [UIButton]()
+    
     //Outlets for each button
 
     @IBOutlet weak var a1: UIButton!
@@ -45,14 +49,30 @@ class GameViewController: UIViewController {
     @IBOutlet weak var c3: UIButton!
     
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initializeBoard()
+        
         turnLabel.text = p1Name
-
     
+    }
+    
+    // Function to initialize the buttons to the array (aka the board)
+    
+    func initializeBoard() {
+        board.append(a1)
+        board.append(a2)
+        board.append(a3)
+        
+        board.append(b1)
+        board.append(b2)
+        board.append(b3)
+        
+        board.append(c1)
+        board.append(c2)
+        board.append(c3)
+        
     }
     
     // This function runs when any of the buttons are pressed
@@ -61,7 +81,52 @@ class GameViewController: UIViewController {
         
         addToBoard(sender)
         
+        if (fullBoard()) { // If it's true that the board is full
+            
+        }
         
+    }
+    
+    
+    
+    func resultAlert(title: String) {
+        
+        let ac = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: { (_) in self.resetBoard()
+            }))
+        self.present(ac, animated: true)
+    }
+    
+    // Function that sets all the buttons back to nil
+    
+    func resetBoard() {
+        for button in board {
+            button.setTitle(nil, for: .normal)
+            button.isEnabled = true
+        }
+        if firstTurn == Turn.O {
+            firstTurn = Turn.X
+            turnLabel.text = p1Name
+        }
+        else if firstTurn == Turn.X {
+            firstTurn = Turn.O
+            turnLabel.text = p2Name
+        }
+        currentTurn = firstTurn
+    }
+        
+        
+        
+    
+    // Function that checks to see if there's any empty space on the board
+    
+    func fullBoard() -> Bool {
+        for button in board {
+            if button.title(for: .normal) == nil {
+                return false
+            }
+        }
+        return true
     }
     
     // Checks to see if pressed button is empty
@@ -80,7 +145,7 @@ class GameViewController: UIViewController {
                 
             }
             
-            sender.isEnabled = false
+            sender.isEnabled = false // Removes the animation if button isn't empty
         }
     }
     
