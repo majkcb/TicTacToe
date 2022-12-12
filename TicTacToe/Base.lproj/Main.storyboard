@@ -11,7 +11,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="MainViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -66,6 +66,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="j56-lQ-MUa"/>
                     <connections>
                         <outlet property="p1TextField" destination="QWd-Qm-xLp" id="GpV-X7-1Qk"/>
                         <outlet property="p2TextField" destination="dha-rM-T6q" id="1d3-5s-Z53"/>
@@ -228,9 +229,8 @@
                                     <constraint firstAttribute="width" secondItem="gZV-nT-1tq" secondAttribute="height" multiplier="1:1" id="anZ-ij-pKX"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="backward.end" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Dmc-jN-byo">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" image="backward.end" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Dmc-jN-byo">
                                 <rect key="frame" x="316" y="73.333333333333258" width="33" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -241,6 +241,7 @@
                         <viewLayoutGuide key="safeArea" id="BRl-lM-Av0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Dmc-jN-byo" firstAttribute="centerY" secondItem="BRl-lM-Av0" secondAttribute="centerY" id="0Wa-bf-hTN"/>
                             <constraint firstItem="lQ0-0W-tcZ" firstAttribute="centerX" secondItem="BRl-lM-Av0" secondAttribute="centerX" id="1J9-PU-ZAE"/>
                             <constraint firstItem="PyC-WR-JL8" firstAttribute="top" secondItem="BRl-lM-Av0" secondAttribute="top" constant="94" id="FAT-jr-Amy"/>
                             <constraint firstItem="lQ0-0W-tcZ" firstAttribute="top" secondItem="BRl-lM-Av0" secondAttribute="top" constant="52" id="IK1-eY-yG6"/>
@@ -248,6 +249,7 @@
                             <constraint firstItem="gZV-nT-1tq" firstAttribute="centerX" secondItem="BRl-lM-Av0" secondAttribute="centerX" id="Lxd-9w-6KD"/>
                             <constraint firstItem="gZV-nT-1tq" firstAttribute="width" secondItem="HjW-Lt-K9D" secondAttribute="width" multiplier="0.9" id="ScA-pr-sVF"/>
                             <constraint firstItem="gZV-nT-1tq" firstAttribute="centerY" secondItem="BRl-lM-Av0" secondAttribute="centerY" id="Yhj-TE-Ytg"/>
+                            <constraint firstItem="Dmc-jN-byo" firstAttribute="top" secondItem="BRl-lM-Av0" secondAttribute="top" constant="11.999999999999929" id="eHf-OR-K5O"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Eed-tk-QWd"/>
@@ -262,6 +264,7 @@
                         <outlet property="c2" destination="tyX-Yf-osO" id="WGh-m8-o7u"/>
                         <outlet property="c3" destination="yrA-u3-zAC" id="AvY-pn-mpZ"/>
                         <outlet property="turnLabel" destination="PyC-WR-JL8" id="JXa-f3-Yj9"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="segueToMain" id="DXQ-6I-Jdn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnl-3d-7OJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

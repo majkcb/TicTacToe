@@ -10,6 +10,8 @@ import UIKit
 class GameViewController: UIViewController {
     @IBOutlet weak var turnLabel: UILabel!
     
+    let segueToMain = "segueToMain"
+    
     //Retrieve the content of the TextFields in the Main Screen in these variables
     
     var p1Name : String?
@@ -32,7 +34,7 @@ class GameViewController: UIViewController {
     var firstTurn = Turn.X
     var currentTurn = Turn.X
     
-    // The characters that are placed each turn
+    // The symbols that are placed each turn
     
     var CIRCLE = "O"
     var CROSS = "X"
@@ -66,8 +68,10 @@ class GameViewController: UIViewController {
     
     @IBAction func exitGameTap(_ sender: UITapGestureRecognizer) {
         
+        performSegue(withIdentifier: segueToMain, sender: self)
         
     }
+    
     
     // Function to initialize the buttons to the array (aka the board)
     
@@ -196,9 +200,6 @@ class GameViewController: UIViewController {
         }
         currentTurn = firstTurn
     }
-        
-        
-        
     
     // Function that checks to see if there's any empty space on the board
     
