@@ -75,24 +75,24 @@ class GameViewController: UIViewController {
         
     }
     
-    // This function runs when any of the buttons are pressed
+    // Function runs when any of the buttons are pressed
     
     @IBAction func boardTapped(_ sender: UIButton) {
         
         addToBoard(sender)
         
-        if (fullBoard()) { // If it's true that the board is full
-            
+        if (fullBoard()) {
+            resultAlert(title: "It's a draw!")
         }
         
     }
     
-    
+    // Function that alerts the users (in this case that the board is full, and containins a function to reset the board
     
     func resultAlert(title: String) {
         
         let ac = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
-        ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: { (_) in self.resetBoard()
+        ac.addAction(UIAlertAction(title: "Continue Playing", style: .default, handler: { (_) in self.resetBoard()
             }))
         self.present(ac, animated: true)
     }
