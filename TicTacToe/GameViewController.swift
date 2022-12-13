@@ -10,6 +10,8 @@ import UIKit
 class GameViewController: UIViewController {
     @IBOutlet weak var turnLabel: UILabel!
     
+    // Variable for segue to mainscreen
+    
     let segueToMain = "segueToMain"
     
     //Retrieve the content of the TextFields in the Main Screen in these variables
@@ -17,7 +19,7 @@ class GameViewController: UIViewController {
     var p1Name : String?
     var p2Name : String?
     
-    // Score
+    // Variables to keep score
     
     var xScore = 0
     var oScore = 0
@@ -65,13 +67,13 @@ class GameViewController: UIViewController {
     
     }
     
+    // Segue back to mainscreen
     
     @IBAction func exitGameTap(_ sender: UITapGestureRecognizer) {
         
         performSegue(withIdentifier: segueToMain, sender: self)
         
     }
-    
     
     // Function to initialize the buttons to the array (aka the board)
     
