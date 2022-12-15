@@ -19,6 +19,10 @@ class GameViewController: UIViewController {
     var p1Name : String?
     var p2Name : String?
     
+    // AI-Mode
+    
+    var pcGameMode : Int?
+    
     // Variables to keep score
     
     var xScore = 0
@@ -36,7 +40,7 @@ class GameViewController: UIViewController {
     var firstTurn = Turn.X
     var currentTurn = Turn.X
     
-    // The symbols that are placed each turn
+    // Constants that contains the symbols that are placed each turn
     
     var CIRCLE = "O"
     var CROSS = "X"
@@ -119,6 +123,8 @@ class GameViewController: UIViewController {
         }
         
     }
+    
+    //Uses thisSymbol function to check for buttons that contains symbols
     
     func checkForVictory(_ s :String) -> Bool {
         
@@ -220,11 +226,13 @@ class GameViewController: UIViewController {
         if (sender.title(for: .normal) == nil) {
             if (currentTurn == Turn.O) {
                 sender.setTitle(CIRCLE, for: .normal)
+                //sender.setTitleColor(.red, for: .normal)
                 currentTurn = Turn.X
                 turnLabel.text = p1Name
                 
             } else if (currentTurn == Turn.X) {
                 sender.setTitle(CROSS, for: .normal)
+                //sender.setTitleColor(.green, for: .normal)
                 currentTurn = Turn.O
                 turnLabel.text = p2Name
                 
