@@ -13,25 +13,25 @@ class MainViewController: UIViewController {
     @IBOutlet weak var p2TextField: UITextField!
     
     
-    var gameMode = 0
+    //var gameMode = 0
     
     let segueToPlay = "segueToPlayView"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if p1TextField.text == nil {
-            p1TextField.text = "Player 1"
-        }
-        
-        if p2TextField.text == nil {
-            p2TextField.text = "Player 2"
-        }
-        
+   //     if p1TextField.text == "" {
+   //         p1TextField.text = "Player 1"
+   //     }
+   //
+   //     if p2TextField.text == "" {
+   //         p2TextField.text = "Player 2"
+   //     }
+   //
     }
     
     @IBAction func playBtn(_ sender: UIButton) {
-        performSegue(withIdentifier: segueToPlay, sender: self)
+        performSegue(withIdentifier: segueToPlay, sender: 1)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -44,7 +44,7 @@ class MainViewController: UIViewController {
             }
             
             if let destinationVCPC = segue.destination as? GameViewController {
-                destinationVCPC.pcGameMode = gameMode
+                destinationVCPC.gameMode = sender as? Int
             }
         }
         
@@ -52,7 +52,7 @@ class MainViewController: UIViewController {
     
     @IBAction func playVsAI(_ sender: UIButton) {
         
-        performSegue(withIdentifier: segueToPlay, sender: self)
+        performSegue(withIdentifier: segueToPlay, sender: 2)
         
     }
     

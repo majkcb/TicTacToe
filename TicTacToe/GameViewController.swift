@@ -19,9 +19,9 @@ class GameViewController: UIViewController {
     var p1Name : String?
     var p2Name : String?
     
-    // AI-Mode
+    // Game Mode decided by Int
     
-    var pcGameMode : Int?
+    var gameMode: Int?
     
     // Variables to keep score
     
@@ -67,8 +67,13 @@ class GameViewController: UIViewController {
         
         initializeBoard()
         
-        turnLabel.text = p1Name
-    
+        if gameMode == 1 {
+            turnLabel.text = p1Name
+        } else if gameMode == 2 {
+            turnLabel.text = "Player 1"
+            
+        }
+        
     }
     
     // Segue back to mainscreen
@@ -181,14 +186,27 @@ class GameViewController: UIViewController {
         
         // Score update message
         
-        let message = "\n\(p1Name ?? "Crosses"): " + String(xScore) + "\n\(p2Name ?? "Circles"): " + String(oScore)
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-        
-        // Reset board action
-
-        ac.addAction(UIAlertAction(title: "Continue Playing", style: .default, handler: { (_) in self.resetBoard()
+        if gameMode == 1 {
+            
+            let message = "\n\(p1Name ?? "Crosses"): " + String(xScore) + "\n\(p2Name ?? "Circles"): " + String(oScore)
+            let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            
+            // Reset board action
+            
+            ac.addAction(UIAlertAction(title: "Continue Playing", style: .default, handler: { (_) in self.resetBoard()
             }))
-        self.present(ac, animated: true)
+            self.present(ac, animated: true)
+        } else if gameMode == 2 {
+            
+            let message = "\n Player 1 " + String(xScore) + "\n Computer " + String(oScore)
+            let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            
+            // Reset board action
+            
+            ac.addAction(UIAlertAction(title: "Continue Playing", style: .default, handler: { (_) in self.resetBoard()
+            }))
+            
+        }
     }
     
     // Function that sets all the buttons back to nil
@@ -223,22 +241,44 @@ class GameViewController: UIViewController {
     // Checks to see if pressed button is empty
     
     func addToBoard(_ sender: UIButton) {
-        if (sender.title(for: .normal) == nil) {
-            if (currentTurn == Turn.O) {
-                sender.setTitle(CIRCLE, for: .normal)
-                //sender.setTitleColor(.red, for: .normal)
-                currentTurn = Turn.X
-                turnLabel.text = p1Name
+        
+        if gameMode == 1 {
+            if (sender.title(for: .normal) == nil) {
+                if (currentTurn == Turn.O) {
+                    sender.setTitle(CIRCLE, for: .normal)
+                    //sender.setTitleColor(.red, for: .normal)
+                    currentTurn = Turn.X
+                    turnLabel.text = p1Name
+                    
+                } else if (currentTurn == Turn.X) {
+                    sender.setTitle(CROSS, for: .normal)
+                    //sender.setTitleColor(.green, for: .normal)
+                    currentTurn = Turn.O
+                    turnLabel.text = p2Name
+                    
+                }
                 
-            } else if (currentTurn == Turn.X) {
-                sender.setTitle(CROSS, for: .normal)
-                //sender.setTitleColor(.green, for: .normal)
-                currentTurn = Turn.O
-                turnLabel.text = p2Name
+                sender.isEnabled = false // Removes the animation if button isn't empty
+            }
+        } else if gameMode == 2 {
+            if (sender.title(for: .normal) == nil) {
+                if (currentTurn == Turn.O) {
+                    sender.setTitle(CIRCLE, for: .normal) // Fixa en random function 
+                    //sender.setTitleColor(.red, for: .normal)
+                    currentTurn = Turn.X
+                    turnLabel.text = p1Name
+                    
+                } else if (currentTurn == Turn.X) {
+                    sender.setTitle(CROSS, for: .normal)
+                    //sender.setTitleColor(.green, for: .normal)
+                    currentTurn = Turn.O
+                    turnLabel.text = "Computer"
+                    
+                }
                 
+                sender.isEnabled = false // Removes the animation if button isn't empty
             }
             
-            sender.isEnabled = false // Removes the animation if button isn't empty
         }
     }
     
